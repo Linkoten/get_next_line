@@ -1,37 +1,47 @@
 #include "get_next_line.h"
+#include <stdio.h>
 
-int	ft_strchrlen(char *str, int c)
+
+int		get_buf(t_gnl **current, char **line)
 {
-	int i;
+	int ret;
 
-	i = 0;
-	while (str[i])
+	ret = read((*current)->fd, (*current)->buf, BUFF_SIZE);
+	if (ret < 0)
+		return (0);
+	else
+		*line = ft_strdup((*current)->buf);
+	return (1);
+}
+
+t_gnl	*get_gnl(int filed, t_list *lst)
+{
+	t_list	*temp;
+	t_gnl	*new;
+
+	new = NULL;
+	temp = lst;
+	while (temp)
 	{
-		if (str[i] == c)
-			return (i);
-		i++;
+		if ((((t_gnl *)(temp->content)))->fd == filed)
+			return (temp->content);
+		temp = temp->next;
 	}
-	return (-1);
+	ft_lstadd_back(&lst, ft_lstnew(new));
+	new = malloc(sizeof(t_gnl));
+	new->fd = filed;
+	return (new);
 }
 
 int	get_next_line(const int fd, char **line)
 {
-	static	int	nb_line;
-	char	buf[BUFF_SIZE + 1];
-	int		ret;
-	int		i;
-	
-	i = 0;
-	nb_line = 0;
-	(void)line;
-	ret = read(fd, buf, BUFF_SIZE);
-	while (ret > 0)
-	{
-		buf[ret] = '\0';
-		if (ft_strchrlen(buf, 10))
-			*line = ft_substr(buf, 0, ft_strchrlen(buf, 10));
-		ret = read(fd, buf, BUFF_SIZE);
-	}
-	nb_line++;
-	return (0);
+	static	t_list	*lst;
+	t_gnl			*gnl;
+
+	if (fd < 0 || !line)
+		return (-1);
+	gnl = get_gnl(fd, lst);
+	if (!get_buf(&gnl, line))
+		return (0);
+	return (1);
 }

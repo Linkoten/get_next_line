@@ -7,6 +7,12 @@
 
 # define BUFF_SIZE 4096
 
+typedef struct 	s_gnl
+{
+	char	buf[BUFF_SIZE + 1];
+	int		fd;
+}				t_gnl;
+
 int	get_next_line(const int fd, char **line);
 
 #endif

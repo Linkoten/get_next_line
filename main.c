@@ -14,12 +14,16 @@ int main(int ac, char **av)
 
 	char *line;
 	int fd;
+	int fd2;
 
 	line = NULL;
 	fd = open(av[1], O_RDONLY);
+	fd2 = open(av[2], O_RDONLY);
 	get_next_line(fd, &line);
-	printf("%s", line);
-
+	printf("%s\n", line);
+	get_next_line(fd2, &line);
+	printf("\n\n\n\n %s\n\n", line);
 	close(fd);
+	close(fd2);
 	free(line);
 }

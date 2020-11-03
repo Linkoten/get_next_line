@@ -6,7 +6,7 @@
 /*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 15:18:37 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/10/31 12:02:34 by pbrochar         ###   ########.fr       */
+/*   Updated: 2020/11/01 13:13:50 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_realloc(char *src, size_t size);
 char	**ft_split(char *s, char c);
 
 size_t	ft_strlen(const char *s);
