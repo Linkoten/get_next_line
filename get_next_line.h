@@ -9,8 +9,9 @@
 
 typedef struct 	s_gnl
 {
-	char	buf[BUFF_SIZE + 1];
-	int		fd;
+	char			buf[BUFF_SIZE + 1];
+	unsigned int	pos;
+	int				fd;
 }				t_gnl;
 
 int	get_next_line(const int fd, char **line);
