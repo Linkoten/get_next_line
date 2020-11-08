@@ -39,7 +39,6 @@ static	t_gnl	*get_gnl(int fd, t_list **lst)
 	t_gnl	*new;
 
 	temp = *lst;
-
 	new = NULL;
 	while (temp)
 	{
@@ -59,8 +58,9 @@ int	get_next_line(const int fd, char **line)
 {
 	static	t_list	*lst;
 	t_gnl			*gnl;
-	int ret;
-	unsigned int len;
+	int				ret;
+	unsigned int 	len;
+
 	if (fd < 0 || !line)
 		return (-1);
 	gnl = get_gnl(fd, &lst);
