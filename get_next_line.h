@@ -5,7 +5,7 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define BUFF_SIZE 4096
+# define BUFF_SIZE 5
 
 typedef struct 	s_gnl
 {

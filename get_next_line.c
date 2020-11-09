@@ -1,38 +1,43 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-static	unsigned int	ft_strchrlen(t_gnl *gnl, int c)
+static	int	get_current_line(t_gnl *gnl, char **line)
 {
-	unsigned int i;
-	unsigned int a;
+	int 	i;
+	size_t 	a;
+	int 	ret;
 
-	a = 0;	
+	a = 0;
 	i = gnl->pos;
-	while (gnl->buf[i] && gnl->buf[i] != c)
+	*line = malloc(sizeof(char));
+	*line[0] = '\0';
+	if (gnl->buf[0] == '\0')
+		ret = read(gnl->fd, gnl->buf, BUFF_SIZE);
+	while (gnl->buf[i] != '\n')
 	{
-		i++;
 		a++;
+		if (gnl->buf[i] == '\0')
+		{
+			*line = ft_realloc(*line, ft_strlen(*line) + a);
+			ft_strlcat(*line, &(gnl->buf[gnl->pos]), a);
+			ret = read(gnl->fd, gnl->buf, BUFF_SIZE);
+			if (ret == -1)
+				return (-1);
+		}
+		if (gnl->buf[i] == '\n')
+		{
+			*line = ft_realloc(*line, (ft_strlen(*line) + a));
+			ft_strlcat(*line, &(gnl->buf[gnl->pos]), a);
+			break;
+		}
+		i++;
 	}
-	return (a);
-}
-/*
-static	int		get_buf(t_gnl *current, char **line)
-{
-	int ret;
-	int len;
-
-	printf("\n ****%d ****\n", current->pos);
-	printf("\n---- %d ----\n", current->fd);
-	ret = read(current->fd, current->buf, BUFF_SIZE);
-	len = ft_strchrlen(&current->buf[current->pos], 10);
-	*line = ft_substr(current->buf, current->pos, len);
-	current->pos = len;
-	if (ret < 0)
+	gnl->pos = gnl->pos + a;
+	if (ret == 0)
 		return (0);
-	
 	return (1);
 }
-*/
+
 static	t_gnl	*get_gnl(int fd, t_list **lst)
 {
 	t_list	*temp;
@@ -58,17 +63,11 @@ int	get_next_line(const int fd, char **line)
 {
 	static	t_list	*lst;
 	t_gnl			*gnl;
-	int				ret;
-	unsigned int 	len;
 
 	if (fd < 0 || !line)
 		return (-1);
 	gnl = get_gnl(fd, &lst);
-	ret = read(gnl->fd, gnl->buf, BUFF_SIZE);
-	len = ft_strchrlen(gnl, 10);
-	*line = ft_substr(gnl->buf, gnl->pos, len);
-	gnl->pos = gnl->pos + len + 1;
-	(void)ret;
-
+	get_current_line(gnl, line);
+	printf("%s\n", *line);
 	return (1);
 }
