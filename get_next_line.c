@@ -1,38 +1,43 @@
 #include "get_next_line.h"
 #include <stdio.h>
-
+#include <string.h>
 static	int	get_current_line(t_gnl *gnl, char **line)
 {
 	int 	i;
 	size_t 	a;
 	int 	ret;
 
-	a = 0;
+	a = 1;
 	i = gnl->pos;
 	*line = malloc(sizeof(char));
 	*line[0] = '\0';
-	if (gnl->buf[0] == '\0')
+	if (gnl->buf[i] == '\0')
+	{
+		gnl->pos = 0;
+		i = 0;
 		ret = read(gnl->fd, gnl->buf, BUFF_SIZE);
+		gnl->buf[ret] = '\0';
+	}
 	while (gnl->buf[i] != '\n')
 	{
-		a++;
 		if (gnl->buf[i] == '\0')
 		{
 			*line = ft_realloc(*line, ft_strlen(*line) + a);
-			ft_strlcat(*line, &(gnl->buf[gnl->pos]), a);
+			ft_strlcat(*line, &(gnl->buf[gnl->pos]), ft_strlen(*line) + a);
 			ret = read(gnl->fd, gnl->buf, BUFF_SIZE);
-			if (ret == -1)
-				return (-1);
+			gnl->buf[ret] = '\0';
+			i = 0;
+			a = 1;
+			gnl->pos = 0;
 		}
 		if (gnl->buf[i] == '\n')
-		{
-			*line = ft_realloc(*line, (ft_strlen(*line) + a));
-			ft_strlcat(*line, &(gnl->buf[gnl->pos]), a);
 			break;
-		}
+		a++;
 		i++;
 	}
-	gnl->pos = gnl->pos + a;
+	*line = ft_realloc(*line, (ft_strlen(*line) + a));
+	ft_strlcat(*line, &(gnl->buf[gnl->pos]), ft_strlen(*line) + a);
+	gnl->pos =  i + 1;	
 	if (ret == 0)
 		return (0);
 	return (1);
@@ -68,6 +73,5 @@ int	get_next_line(const int fd, char **line)
 		return (-1);
 	gnl = get_gnl(fd, &lst);
 	get_current_line(gnl, line);
-	printf("%s\n", *line);
 	return (1);
 }

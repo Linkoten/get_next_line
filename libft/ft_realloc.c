@@ -8,7 +8,6 @@ char *ft_realloc(char *src, size_t size)
 	if (new == NULL)
 		return (NULL);
 	new = ft_memcpy(new, src, ft_strlen(src));
-	new[size] = '\0';
 	free(src);
 	return (new);
 }

@@ -17,8 +17,26 @@ int main(int ac, char **av)
 
 	line = NULL;
 	fd = open(av[1], O_RDONLY);
-	if (get_next_line(fd, &line) == 1)
-		printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
 	close(fd);
 	free(line);
 }
