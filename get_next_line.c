@@ -6,7 +6,7 @@ static	int	get_current_line(t_gnl *gnl, char **line)
 	int 	i;
 	size_t 	a;
 	int 	ret;
-
+	
 	a = 1;
 	i = gnl->pos;
 	*line = malloc(sizeof(char));
@@ -30,14 +30,14 @@ static	int	get_current_line(t_gnl *gnl, char **line)
 			a = 1;
 			gnl->pos = 0;
 		}
-		if (gnl->buf[i] == '\n')
+		if (gnl->buf[i] == '\n' || ret == 0)
 			break;
 		a++;
 		i++;
 	}
 	*line = ft_realloc(*line, (ft_strlen(*line) + a));
 	ft_strlcat(*line, &(gnl->buf[gnl->pos]), ft_strlen(*line) + a);
-	gnl->pos =  i + 1;	
+	gnl->pos =  i + 1;
 	if (ret == 0)
 		return (0);
 	return (1);
@@ -72,6 +72,7 @@ int	get_next_line(const int fd, char **line)
 	if (fd < 0 || !line)
 		return (-1);
 	gnl = get_gnl(fd, &lst);
-	get_current_line(gnl, line);
+	if (get_current_line(gnl, line) == 0)
+		return (0);
 	return (1);
 }

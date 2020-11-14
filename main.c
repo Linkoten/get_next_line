@@ -40,5 +40,13 @@ int main(int ac, char **av)
 	printf("%s\n", line6);
 	get_next_line(fd, &line7);
 	printf("%s\n", line7);
+	free(line);
+	free(line2);
+	free(line3);
+	free(line4);
+	free(line5);
+	free(line6);
+	free(line7);
+
 	close(fd);
 }
