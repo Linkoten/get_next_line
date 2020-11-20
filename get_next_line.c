@@ -1,5 +1,4 @@
 #include "get_next_line.h"
-#include <stdio.h>
 
 static	void	ft_line_tool(char **line, size_t *a, int *i, t_gnl *gnl)
 {

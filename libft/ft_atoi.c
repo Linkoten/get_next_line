@@ -1,26 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/17 19:05:00 by pbrochar          #+#    #+#             */
+/*   Updated: 2020/11/19 20:20:13 by pbrochar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_atoi(const char *nptr)
 {
-	int				i;
 	int				s;
-	size_t			nbr;
+	long int		nbr;
 
-	i = 0;
 	nbr = 0;
 	s = 1;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while ((*nptr >= 9 && *nptr <= 13) || *nptr == 32)
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
 	{
-		if (nptr[i] == '-')
+		if (*nptr == '-')
 			s *= -1;
-		i++;
+		nptr++;
 	}
-	while (ft_isdigit((int)nptr[i]))
+	while (ft_isdigit(*nptr))
 	{
-		nbr = (nbr * 10) + (nptr[i] - '0');
-		i++;
+		if (nbr * s < -2147483648 || nbr * s > 2147483647)
+			return (s < 0 ? 0 : -1);
+		nbr = (nbr * 10) + (*nptr - '0');
+		nptr++;
 	}
-	return (nbr * s);
+	return ((int)nbr * s);
 }
