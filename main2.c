@@ -12,7 +12,7 @@ int main(int ac, char **av)
 	(void)ac;
 	fd = open(av[1], O_RDONLY);
 	while(get_next_line(fd, &line) != 0)
-		printf("%s\n", line);
+		printf("%s", line);
 	return (0);
 	close(fd);
 	free(line);	

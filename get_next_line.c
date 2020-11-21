@@ -6,7 +6,7 @@
 /*   By: pbrochar </var/mail/pbrochar>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 18:43:08 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/11/21 19:44:39 by pbrochar         ###   ########.fr       */
+/*   Updated: 2020/11/21 20:50:52 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static	void	ft_line_tool(char **line, size_t *a, int *i, t_gnl *gnl)
 	gnl->pos = *i + 1;
 	*i = 0;
 	*a = 1;
+//	if ((*line)[0] == '\n')
+//		(*line)[0] = '\0';
 }
 
 static	int		get_current_line(t_gnl *gnl, char **line)
@@ -31,6 +33,7 @@ static	int		get_current_line(t_gnl *gnl, char **line)
 	i = gnl->pos;
 	while (gnl->buf[i] != '\n')
 	{
+		
 		if (gnl->buf[i] == '\0')
 		{
 			ft_line_tool(line, &a, &i, gnl);
@@ -44,6 +47,8 @@ static	int		get_current_line(t_gnl *gnl, char **line)
 		i++;
 	}
 	ft_line_tool(line, &a, &i, gnl);
+	if ((*line)[0] == '\n')
+		(*line)[0] = '\0';
 	if (ret < 1)
 		return (ret);
 	return (1);
