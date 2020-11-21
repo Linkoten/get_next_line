@@ -4,11 +4,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define BUFF_SIZE 500
+//# define BUFFER_SIZE 500
 
 typedef struct 	s_gnl
 {
-	char			buf[BUFF_SIZE + 1];
+	char			buf[BUFFER_SIZE + 1];
 	unsigned int	pos;
 	int				fd;
 }				t_gnl;
