@@ -3,7 +3,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft.h"
 
 # define BUFF_SIZE 500
 
@@ -14,6 +13,16 @@ typedef struct 	s_gnl
 	int				fd;
 }				t_gnl;
 
-int	get_next_line(const int fd, char **line);
+typedef struct	s_list
+{
+	void			*content;
+	struct s_list	*next;
+}				t_list;
 
+int				get_next_line(const int fd, char **line);
+void			ft_lstadd_back(t_list **alst, t_list *new);
+char 			*ft_realloc(char *src, size_t size);
+size_t			ft_strlcat(char *dest, const char *src, size_t size);
+size_t			ft_strlen(const char *s);
+void			*ft_memcpy(void *dest, const void *src, size_t n);
 #endif

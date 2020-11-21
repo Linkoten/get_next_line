@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbrochar </var/mail/pbrochar>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/21 18:43:08 by pbrochar          #+#    #+#             */
+/*   Updated: 2020/11/21 19:01:07 by pbrochar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 static	void	ft_line_tool(char **line, size_t *a, int *i, t_gnl *gnl)
@@ -40,6 +52,7 @@ static	int		get_current_line(t_gnl *gnl, char **line)
 static	t_gnl	*get_gnl(int fd, t_list **lst)
 {
 	t_list	*temp;
+	t_list	*elem;
 	t_gnl	*new;
 
 	temp = *lst;
@@ -55,7 +68,12 @@ static	t_gnl	*get_gnl(int fd, t_list **lst)
 		return (NULL);
 	new->fd = fd;
 	new->pos = 0;
-	temp = ft_lstnew(new);
+	elem = (t_list *)malloc(sizeof(t_list));
+	if (elem == NULL)
+		return (NULL);
+	elem->content = new;
+	elem->next = NULL;
+	temp = elem;
 	ft_lstadd_back(lst, temp);
 	return ((t_gnl *)(temp->content));
 }
