@@ -6,13 +6,13 @@
 /*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 12:44:07 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/11/22 16:52:55 by pbrochar         ###   ########.fr       */
+/*   Updated: 2020/11/22 17:52:28 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int		get_line(t_gnl *gnl, char **line)
+static int			get_line(t_gnl *gnl, char **line)
 {
 	size_t	len;
 	int		ret;
@@ -33,7 +33,8 @@ static int		get_line(t_gnl *gnl, char **line)
 	}
 	return (1);
 }
-static t_gnl	*get_gnl(int fd, t_list **lst)
+
+static t_gnl		*get_gnl(int fd, t_list **lst)
 {
 	t_list	*temp;
 	t_list	*elem;
@@ -62,7 +63,7 @@ static t_gnl	*get_gnl(int fd, t_list **lst)
 	return ((t_gnl *)(temp->content));
 }
 
-int		get_next_line(const int fd, char **line)
+int					get_next_line(const int fd, char **line)
 {
 	static t_list	*lst;
 	t_gnl			*gnl;
@@ -74,7 +75,7 @@ int		get_next_line(const int fd, char **line)
 	*line = malloc(sizeof(char));
 	(*line)[0] = '\0';
 	ret = get_line(gnl, line);
-	if (ret ==  0)
+	if (ret == 0)
 		return (0);
 	if (ret == -1)
 		return (-1);

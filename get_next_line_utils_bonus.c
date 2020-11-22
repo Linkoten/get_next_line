@@ -6,13 +6,13 @@
 /*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 14:09:43 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/11/22 16:35:59 by pbrochar         ###   ########.fr       */
+/*   Updated: 2020/11/22 17:54:27 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void		*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t			i;
 	unsigned char	*psrc;
@@ -31,7 +31,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void		ft_lstadd_back(t_list **alst, t_list *new)
 {
 	t_list *plst;
 
@@ -46,7 +46,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 		*alst = new;
 }
 
-size_t	ft_strclen(char *str)
+size_t		ft_strclen(char *str)
 {
 	size_t	i;
 
@@ -56,14 +56,15 @@ size_t	ft_strclen(char *str)
 	return (i + 1);
 }
 
-int		ft_strccat(t_gnl *gnl, char **dst)
+int			ft_strccat(t_gnl *gnl, char **dst)
 {
 	size_t	i;
 	size_t	a;
 
 	i = 0;
 	a = gnl->pos;
-	*dst = ft_realloc(*dst, ft_strclen(&(gnl->buf[gnl->pos])) + ft_strclen(*dst));
+	*dst = ft_realloc(*dst, ft_strclen(&(gnl->buf[gnl->pos]))
+						+ ft_strclen(*dst));
 	while ((*dst)[i])
 		i++;
 	while (gnl->buf[a] && gnl->buf[a] != '\n')
@@ -82,7 +83,7 @@ int		ft_strccat(t_gnl *gnl, char **dst)
 	return (0);
 }
 
-char *ft_realloc(char *src, size_t size)
+char		*ft_realloc(char *src, size_t size)
 {
 	char *new;
 

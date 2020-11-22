@@ -7,17 +7,17 @@
 int main(int ac, char **av)
 {
 	char *line;
-//	int fd;
-	(void)av;	
+	int fd;
+//	(void)av;	
 	(void)ac;
-//	fd = open(av[1], O_RDONLY);
-	while(get_next_line(1, &line) != 0)
+	fd = open(av[1], O_RDONLY);
+	while(get_next_line(fd, &line) != 0)
 		printf("|%s|\n", line);
 //	return (0);
 //	get_next_line(fd, &line);
 //	printf("MAIN : %s\\n\n", line);
 //	get_next_line(fd, &line);
 //	printf("MAIN : %s\\n\n", line);
-//	close(fd);
-//	free(line);	
+	close(fd);
+	free(line);	
 }
