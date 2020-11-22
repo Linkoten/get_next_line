@@ -1,5 +1,5 @@
 SRC = get_next_line.c get_next_line_utils.c main2.c
-BUFF = 1
+BUFF = 16
 
 all : 
 	@gcc -Wall -Wextra -Werror -D BUFFER_SIZE=$(BUFF) $(SRC)

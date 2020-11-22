@@ -14,8 +14,9 @@ int main(int ac, char **av)
 	while(get_next_line(fd, &line) != 0)
 		printf("|%s|\n", line);
 //	return (0);
-//	get_next_line(fd, &line);
-//	printf("MAIN : %s\\n\n", line);
+//	printf("input user name : \n");
+//	get_next_line(0, &line);
+//	printf("user name : %s\\n\n", line);
 //	get_next_line(fd, &line);
 //	printf("MAIN : %s\\n\n", line);
 	close(fd);
