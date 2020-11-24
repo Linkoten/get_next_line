@@ -11,7 +11,7 @@ int main(int ac, char **av)
 //	(void)av;	
 	(void)ac;
 	fd = open(av[1], O_RDONLY);
-	while(get_next_line(fd, &line) != 0)
+	while(get_next_line(fd, &line) == 1)
 		printf("|%s|\n", line);
 //	return (0);
 //	printf("input user name : \n");

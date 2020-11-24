@@ -6,7 +6,7 @@
 /*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 12:44:07 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/11/22 17:52:28 by pbrochar         ###   ########.fr       */
+/*   Updated: 2020/11/24 19:48:04 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static int			get_line(t_gnl *gnl, char **line)
 	int		ret;
 
 	len = 0;
+	if (gnl->buf[gnl->pos] == '\0')
+	{
+		ret = read(gnl->fd, gnl->buf, BUFFER_SIZE);
+		gnl->buf[ret] = '\0';
+	}
 	while (len == 0)
 	{
 		len = ft_strccat(gnl, line);
@@ -53,6 +58,7 @@ static t_gnl		*get_gnl(int fd, t_list **lst)
 		return (NULL);
 	new->fd = fd;
 	new->pos = 0;
+	new->buf[0] = '\0';
 	elem = (t_list *)malloc(sizeof(t_list));
 	if (elem == NULL)
 		return (NULL);
@@ -71,7 +77,8 @@ int					get_next_line(const int fd, char **line)
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	gnl = get_gnl(fd, &lst);
+	if ((gnl = get_gnl(fd, &lst)) == NULL)
+		return (-1);
 	*line = malloc(sizeof(char));
 	(*line)[0] = '\0';
 	ret = get_line(gnl, line);

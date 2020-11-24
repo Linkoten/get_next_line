@@ -6,7 +6,7 @@
 /*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 14:09:43 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/11/22 17:54:27 by pbrochar         ###   ########.fr       */
+/*   Updated: 2020/11/24 19:43:28 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int			ft_strccat(t_gnl *gnl, char **dst)
 
 	i = 0;
 	a = gnl->pos;
-	*dst = ft_realloc(*dst, ft_strclen(&(gnl->buf[gnl->pos]))
+	*dst = ft_realloc(*dst, ft_strclen(&(gnl->buf[a]))
 						+ ft_strclen(*dst));
 	while ((*dst)[i])
 		i++;
@@ -83,6 +83,22 @@ int			ft_strccat(t_gnl *gnl, char **dst)
 	return (0);
 }
 
+void	*ft_realloc(void *ptr, size_t newsize)
+{
+	char	*newptr;
+	size_t	cursize;
+
+	if (ptr == 0)
+		return (malloc(newsize));
+	cursize = sizeof(ptr);
+	if (newsize <= cursize)
+		return (ptr);
+	newptr = malloc(newsize);
+	ft_memcpy(ptr, newptr, cursize);
+	free(ptr);
+	return (newptr);
+}
+/*
 char		*ft_realloc(char *src, size_t size)
 {
 	char *new;
@@ -94,4 +110,4 @@ char		*ft_realloc(char *src, size_t size)
 	new[size] = '\0';
 	free(src);
 	return (new);
-}
+}*/
