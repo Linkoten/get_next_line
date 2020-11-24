@@ -6,11 +6,11 @@
 /*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 14:09:43 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/11/24 20:27:41 by pbrochar         ###   ########.fr       */
+/*   Updated: 2020/11/24 20:34:05 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.c"
+#include "get_next_line_bonus.h"
 
 void		ft_lstadd_back(t_list **alst, t_list *new)
 {
