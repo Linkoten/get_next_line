@@ -6,7 +6,7 @@
 /*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 12:44:07 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/11/24 20:17:37 by pbrochar         ###   ########.fr       */
+/*   Updated: 2020/11/24 20:46:03 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int			get_line(t_gnl *gnl, char **line)
 		if (len == 0)
 		{
 			ret = read(gnl->fd, gnl->buf, BUFFER_SIZE);
+			if (ret == -1)
+				return (-1);
 			gnl->buf[ret] = '\0';
 		}
 		if (ret < 0)

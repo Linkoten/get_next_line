@@ -1,4 +1,4 @@
-SRC = get_next_line_bonus.c get_next_line_utils_bonus.c main2.c
+SRC = get_next_line.c get_next_line_utils.c main2.c
 BUFF = 16
 
 all : 
