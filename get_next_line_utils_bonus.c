@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/22 14:09:43 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/11/24 20:34:05 by pbrochar         ###   ########.fr       */
+/*   Created: 2020/11/29 16:14:56 by pbrochar          #+#    #+#             */
+/*   Updated: 2021/02/14 11:57:44 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+
+t_list		*ft_lstnew(void *content)
+{
+	t_list	*new;
+
+	new = (t_list *)malloc(sizeof(t_list));
+	if (new == NULL)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}
 
 void		ft_lstadd_back(t_list **alst, t_list *new)
 {
@@ -64,13 +76,11 @@ int			ft_strccat(t_gnl *gnl, char **dst)
 	return (0);
 }
 
-char	*ft_realloc(char *src, size_t newsize)
+char		*ft_realloc(char *src, size_t newsize)
 {
 	int		i;
 	char	*new;
-	size_t	cursize;
 
-	cursize = ft_strclen(src);
 	if (!(new = malloc(sizeof(char) * newsize)))
 		return (NULL);
 	i = 0;

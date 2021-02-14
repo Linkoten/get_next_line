@@ -6,7 +6,7 @@
 /*   By: pbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 14:11:45 by pbrochar          #+#    #+#             */
-/*   Updated: 2020/11/24 20:22:34 by pbrochar         ###   ########.fr       */
+/*   Updated: 2021/02/14 12:08:12 by pbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h> // A ENLEVER
 
 typedef struct	s_list
 {
@@ -36,4 +35,5 @@ char			*ft_realloc(char *src, size_t newsize);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
 int				ft_strccat(t_gnl *gnl, char **dst);
 size_t			ft_strclen(char *str);
+t_list			*ft_lstnew(void *content);
 #endif
